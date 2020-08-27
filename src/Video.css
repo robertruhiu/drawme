@@ -37,3 +37,10 @@ body {
     width: 100%;
     height: auto;
 }
+.Vid{
+    min-width: 30%;
+    min-height: 40%;
+    width: 45%;
+    height: 100%
+
+}

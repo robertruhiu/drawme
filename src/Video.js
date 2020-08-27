@@ -20,7 +20,7 @@ import Modal from 'react-bootstrap/Modal'
 import 'bootstrap/dist/css/bootstrap.css'
 import "./Video.css"
 
-const server_url = process.env.NODE_ENV === 'production' ? 'https://video.sebastienbiollo.com' : "http://localhost:4001"
+const server_url = process.env.NODE_ENV === 'production' ? 'https://codelnchat.herokuapp.com' : "http://localhost:4001"
 
 var connections = {}
 const peerConnectionConfig = {
@@ -368,9 +368,9 @@ class Video extends Component {
 		ctx.resume()
 		return Object.assign(dst.stream.getAudioTracks()[0], { enabled: false })
 	}
-	black = ({ width = 640, height = 480 } = {}) => {
+	black = ({ width = 300, height = 280 } = {}) => {
 		let canvas = Object.assign(document.createElement("canvas"), { width, height })
-		canvas.getContext('2d').fillRect(0, 0, width, height)
+		canvas.getContext('2d').fillRect(0, 0, width,height)
 		let stream = canvas.captureStream()
 		return Object.assign(stream.getVideoTracks()[0], { enabled: false })
 	}
@@ -455,16 +455,17 @@ class Video extends Component {
 			<div>
 				{this.state.askForUsername === true ?
 					<div>
-						<div style={{background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
-								textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"}}>
-							<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
-							<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
-							<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
-						</div>
 
-						<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
+
+						<div style={{ justifyContent: "center" }}>
 							<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-								borderStyle: "solid",borderColor: "#bdbdbd",objectFit: "fill",width: "60%",height: "30%"}}></video>
+								borderStyle: "solid",borderColor: "#bdbdbd",}}></video>
+							<div style={{background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
+								textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"}}>
+								<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
+								<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
+								<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
+							</div>
 						</div>
 					</div>
 					:
@@ -521,9 +522,7 @@ class Video extends Component {
 							</div>
 
 							<Row id="main" className="flex-container" style={{ margin: 0, padding: 0 }}>
-								<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-									borderStyle: "solid",borderColor: "#bdbdbd",margin: "10px",objectFit: "fill",
-									width: "100%",height: "100%"}}></video>
+								<video id="my-video" ref={this.localVideoref} autoPlay muted className="Vid" ></video>
 							</Row>
 						</div>
 					</div>
